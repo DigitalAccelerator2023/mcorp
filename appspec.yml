@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/digital-accelerator
+file_exists_behavior: OVERWRITE
+hooks:
+  ApplicationStop:
+    - location: stopme.sh
+      timeout: 10
+      runas: root
+  ApplicationStart:
+    - location: start.sh
+      timeout: 20
+      runas: root
+  ValidateService:
+    - location: check_status.sh
+      timeout: 5
+      runas: root
